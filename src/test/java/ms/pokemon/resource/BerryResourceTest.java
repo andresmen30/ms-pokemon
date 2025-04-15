@@ -22,6 +22,7 @@ import ms.pokemon.dto.berry.BerryFirmnessDto;
 import ms.pokemon.dto.berry.BerryFlavorDto;
 import ms.pokemon.mock.BerryMock;
 import ms.pokemon.service.BerryService;
+import ms.pokemon.util.ResourcePath;
 
 @Slf4j
 @QuarkusTest
@@ -31,15 +32,16 @@ class BerryResourceTest {
    BerryService berryService;
 
    @ParameterizedTest
-   @ValueSource(strings = {"pikachu", "bulbasaur", "1", "5"})
+   @ValueSource(strings = { "pikachu", "bulbasaur", "1", "5" })
    void getBerrySuccess(final String idOrName) {
-      log.info("start test getBerrySuccess");
+      log.info("start test getBerrySuccess idOrName: {}", idOrName);
       final BerryDto berryDto = BerryMock.getBerry();
       when(berryService.getBerry(idOrName)).thenReturn(berryDto);
       given()
             .queryParam("idOrName", idOrName)
             .when()
-            .get("/pokemon/berry")
+            .basePath(ResourcePath.BASE_PATH_POKEMON)
+            .get(ResourcePath.ENDPOINT_BERRY)
             .then()
             .statusCode(Response.Status.OK.getStatusCode())
             .body("id", is(berryDto.getId()))
@@ -55,7 +57,8 @@ class BerryResourceTest {
       given()
             .queryParam("idOrName", StringUtils.EMPTY)
             .when()
-            .get("/pokemon/berry")
+            .basePath(ResourcePath.BASE_PATH_POKEMON)
+            .get(ResourcePath.ENDPOINT_BERRY)
             .then()
             .statusCode(Response.Status.BAD_REQUEST.getStatusCode())
             .body("time", notNullValue())
@@ -65,15 +68,16 @@ class BerryResourceTest {
    }
 
    @ParameterizedTest
-   @ValueSource(strings = {"pikachu", "bulbasaur", "1", "5"})
+   @ValueSource(strings = { "pikachu", "bulbasaur", "1", "5" })
    void getBerryFirmnessSuccess(final String idOrName) {
-      log.info("start test getBerryFirmness");
+      log.info("start test getBerryFirmness idOrName: {}", idOrName);
       final BerryFirmnessDto berryFirmness = BerryMock.getBerryFirmness();
       when(berryService.getBerryFirmness(idOrName)).thenReturn(berryFirmness);
       given()
             .queryParam("idOrName", idOrName)
             .when()
-            .get("/pokemon/berry-firmness")
+            .basePath(ResourcePath.BASE_PATH_POKEMON)
+            .get(ResourcePath.ENDPOINT_BERRY_FIRMNESS)
             .then()
             .statusCode(Response.Status.OK.getStatusCode())
             .body("id", is(berryFirmness.getId()))
@@ -89,7 +93,8 @@ class BerryResourceTest {
       given()
             .queryParam("idOrName", StringUtils.EMPTY)
             .when()
-            .get("/pokemon/berry-firmness")
+            .basePath(ResourcePath.BASE_PATH_POKEMON)
+            .get(ResourcePath.ENDPOINT_BERRY_FIRMNESS)
             .then()
             .statusCode(Response.Status.BAD_REQUEST.getStatusCode())
             .body("time", notNullValue())
@@ -99,15 +104,16 @@ class BerryResourceTest {
    }
 
    @ParameterizedTest
-   @ValueSource(strings = {"pikachu", "bulbasaur", "1", "5"})
+   @ValueSource(strings = { "pikachu", "bulbasaur", "1", "5" })
    void getBerryFlavorSuccess(final String idOrName) {
-      log.info("start test getBerryFlavorSuccess");
+      log.info("start test getBerryFlavorSuccess idOrName: {}", idOrName);
       final BerryFlavorDto berryFlavor = BerryMock.getBerryFlavor();
       when(berryService.getBerryFlavor(idOrName)).thenReturn(berryFlavor);
       given()
             .queryParam("idOrName", idOrName)
             .when()
-            .get("/pokemon/berry-flavor")
+            .basePath(ResourcePath.BASE_PATH_POKEMON)
+            .get(ResourcePath.ENDPOINT_BERRY_FLAVOR)
             .then()
             .statusCode(Response.Status.OK.getStatusCode())
             .body("id", is(berryFlavor.getId()))
@@ -126,7 +132,8 @@ class BerryResourceTest {
       given()
             .queryParam("idOrName", StringUtils.EMPTY)
             .when()
-            .get("/pokemon/berry-flavor")
+            .basePath(ResourcePath.BASE_PATH_POKEMON)
+            .get(ResourcePath.ENDPOINT_BERRY_FLAVOR)
             .then()
             .statusCode(Response.Status.BAD_REQUEST.getStatusCode())
             .body("time", notNullValue())

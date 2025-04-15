@@ -22,6 +22,7 @@ import ms.pokemon.dto.contests.ContestTypeDto;
 import ms.pokemon.dto.contests.SuperContestEffectDto;
 import ms.pokemon.mock.ContestsMock;
 import ms.pokemon.service.ContestsService;
+import ms.pokemon.util.ResourcePath;
 
 @Slf4j
 @QuarkusTest
@@ -33,13 +34,14 @@ class ContestsResourceTest {
    @ParameterizedTest
    @ValueSource(strings = { "pikachu", "bulbasaur", "1", "5" })
    void getContestTypeSuccess(final String idOrName) {
-      log.info("start test getContestTypeSuccess");
+      log.info("start test getContestTypeSuccess idOrName: {}", idOrName);
       final ContestTypeDto contestType = ContestsMock.getContestType();
       when(contestsService.getContestType(idOrName)).thenReturn(contestType);
       given()
             .queryParam("idOrName", idOrName)
             .when()
-            .get("/pokemon/contest-type")
+            .basePath(ResourcePath.BASE_PATH_POKEMON)
+            .get(ResourcePath.ENDPOINT_CONTEST_TYPE)
             .then()
             .statusCode(Response.Status.OK.getStatusCode())
             .body("id", is(contestType.getId()))
@@ -56,7 +58,8 @@ class ContestsResourceTest {
       given()
             .queryParam("idOrName", StringUtils.EMPTY)
             .when()
-            .get("/pokemon/contest-type")
+            .basePath(ResourcePath.BASE_PATH_POKEMON)
+            .get(ResourcePath.ENDPOINT_CONTEST_TYPE)
             .then()
             .statusCode(Response.Status.BAD_REQUEST.getStatusCode())
             .body("time", notNullValue())
@@ -68,13 +71,14 @@ class ContestsResourceTest {
    @ParameterizedTest
    @ValueSource(strings = { "pikachu", "bulbasaur", "1", "5" })
    void getContestEffectSuccess(final String idOrName) {
-      log.info("start test getContestEffectSuccess");
+      log.info("start test getContestEffectSuccess idOrName: {}", idOrName);
       final ContestEffectDto contestEffect = ContestsMock.getContestEffect();
       when(contestsService.getContestEffect(idOrName)).thenReturn(contestEffect);
       given()
             .queryParam("idOrName", idOrName)
             .when()
-            .get("/pokemon/contest-effect")
+            .basePath(ResourcePath.BASE_PATH_POKEMON)
+            .get(ResourcePath.ENDPOINT_CONTEST_EFFECT)
             .then()
             .statusCode(Response.Status.OK.getStatusCode())
             .body("id", is(contestEffect.getId()))
@@ -91,7 +95,8 @@ class ContestsResourceTest {
       given()
             .queryParam("idOrName", StringUtils.EMPTY)
             .when()
-            .get("/pokemon/contest-effect")
+            .basePath(ResourcePath.BASE_PATH_POKEMON)
+            .get(ResourcePath.ENDPOINT_CONTEST_EFFECT)
             .then()
             .statusCode(Response.Status.BAD_REQUEST.getStatusCode())
             .body("time", notNullValue())
@@ -103,13 +108,14 @@ class ContestsResourceTest {
    @ParameterizedTest
    @ValueSource(strings = { "pikachu", "bulbasaur", "1", "5" })
    void getSuperContestEffectSuccess(final String idOrName) {
-      log.info("start test getSuperContestEffectSuccess");
+      log.info("start test getSuperContestEffectSuccess idOrName: {}", idOrName);
       final SuperContestEffectDto superContestEffect = ContestsMock.getSuperContestEffect();
       when(contestsService.getSuperContestEffect(idOrName)).thenReturn(superContestEffect);
       given()
             .queryParam("idOrName", idOrName)
             .when()
-            .get("/pokemon/super-contest-effect")
+            .basePath(ResourcePath.BASE_PATH_POKEMON)
+            .get(ResourcePath.ENDPOINT_SUPER_CONTEST_EFFECT)
             .then()
             .statusCode(Response.Status.OK.getStatusCode())
             .body("id", is(superContestEffect.getId()))
@@ -125,7 +131,8 @@ class ContestsResourceTest {
       given()
             .queryParam("idOrName", StringUtils.EMPTY)
             .when()
-            .get("/pokemon/super-contest-effect")
+            .basePath(ResourcePath.BASE_PATH_POKEMON)
+            .get(ResourcePath.ENDPOINT_SUPER_CONTEST_EFFECT)
             .then()
             .statusCode(Response.Status.BAD_REQUEST.getStatusCode())
             .body("time", notNullValue())

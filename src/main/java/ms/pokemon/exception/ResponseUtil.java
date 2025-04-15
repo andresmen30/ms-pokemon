@@ -3,8 +3,11 @@ package ms.pokemon.exception;
 import java.time.LocalDateTime;
 
 import jakarta.ws.rs.core.Response;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ms.pokemon.exception.dto.ErrorResponseDto;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ResponseUtil {
 
    public static Response createErrorResponse(final Response.Status status, final String description, final Object data) {

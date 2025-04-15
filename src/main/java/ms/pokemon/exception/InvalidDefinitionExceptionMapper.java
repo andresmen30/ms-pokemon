@@ -9,7 +9,6 @@ import jakarta.ws.rs.ext.Provider;
 @Provider
 public class InvalidDefinitionExceptionMapper implements ExceptionMapper<InvalidDefinitionException> {
 
-
    @Override
    public Response toResponse(InvalidDefinitionException ex) {
       return ResponseUtil.createErrorResponse(Response.Status.INTERNAL_SERVER_ERROR, ex.getMessage(), null);

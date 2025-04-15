@@ -6,27 +6,32 @@ import static org.hamcrest.Matchers.notNullValue;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 import io.restassured.RestAssured;
 
-@QuarkusIntegrationTest
-public class PokemonClientIT {
+import org.apache.commons.lang3.math.NumberUtils;
+import org.junit.jupiter.api.Test;
 
+@QuarkusIntegrationTest
+class BerryResourceIT {
+
+   @Test
    void testGetBerry() {
       RestAssured
             .given()
-            .pathParam("idOrName", "1")
+            .queryParam("idOrName", NumberUtils.INTEGER_ONE)
             .when()
-            .get("/berry/{idOrName}")
+            .get("/pokemon/berry")
             .then()
             .statusCode(200)
             .body("id", is(1))
             .body("name", notNullValue());
    }
 
+   @Test
    void testGetBerryFirmness() {
       RestAssured
             .given()
-            .pathParam("idOrName", "firmness-name")
+            .pathParam("idOrName", NumberUtils.INTEGER_ONE)
             .when()
-            .get("/berry-firmness/{idOrName}")
+            .get("/pokemon/berry-firmness")
             .then()
             .statusCode(200)
             .body("name", is("firmness-name"));
@@ -35,12 +40,12 @@ public class PokemonClientIT {
    void testGetBerryFlavor() {
       RestAssured
             .given()
-            .pathParam("idOrName", "flavor-name")
+            .pathParam("idOrName", NumberUtils.INTEGER_ONE)
             .when()
             .get("/berry-flavor/{idOrName}")
             .then()
             .statusCode(200)
-            .body("name", is("flavor-name"));
+            .body("name", is(NumberUtils.INTEGER_ONE));
    }
 
    void testGetContestType() {

@@ -24,38 +24,30 @@ public class ContestsMock {
    }
 
    public static ContestEffectDto getContestEffect() {
-      return ContestEffectDto.builder()
-                             .id(1)
-                             .appeal(10)
-                             .jam(5)
-                             .effectEntries(Collections.singletonList(EffectDto.builder()
-                                                                               .effect("Increases appeal by 10 points.")
-                                                                               .language(NamedAPIResourceMock.getNamedAPIResource())
-                                                                               .build()))
-                             .flavorTextEntries(Collections.singletonList(FlavorTextDto.builder()
-                                                                                       .flavorText("A move that increases appeal.")
-                                                                                       .language(NamedAPIResourceMock.getNamedAPIResource())
-                                                                                       .build()))
-                             .build();
+      return ContestEffectDto
+            .builder()
+            .id(1)
+            .appeal(10)
+            .jam(5)
+            .effectEntries(Collections.singletonList(
+                  EffectDto.builder().effect("Increases appeal by 10 points.").language(NamedAPIResourceMock.getNamedAPIResource()).build()))
+            .flavorTextEntries(Collections.singletonList(
+                  FlavorTextDto.builder().flavorText("A move that increases appeal.").language(NamedAPIResourceMock.getNamedAPIResource()).build()))
+            .build();
    }
 
-
    public static SuperContestEffectDto getSuperContestEffect() {
-      return SuperContestEffectDto.builder()
-                                  .id(1)
-                                  .appeal(20)
-                                  .flavorTextEntries(Collections.singletonList(FlavorTextDto.builder()
-                                                                                            .flavorText("A move that greatly increases appeal.")
-                                                                                            .language(NamedAPIResourceDto.builder()
-                                                                                                                         .name("en")
-                                                                                                                         .url("https://pokeapi.co/api/v2/language/9/")
-                                                                                                                         .build())
-                                                                                            .build()))
-                                  .moves(Collections.singletonList(NamedAPIResourceDto.builder()
-                                                                                      .name("move-name")
-                                                                                      .url("https://pokeapi.co/api/v2/move/1/")
-                                                                                      .build()))
-                                  .build();
+      return SuperContestEffectDto
+            .builder()
+            .id(1)
+            .appeal(20)
+            .flavorTextEntries(Collections.singletonList(FlavorTextDto
+                  .builder()
+                  .flavorText("A move that greatly increases appeal.")
+                  .language(NamedAPIResourceDto.builder().name("en").url("https://pokeapi.co/api/v2/language/9/").build())
+                  .build()))
+            .moves(Collections.singletonList(NamedAPIResourceDto.builder().name("move-name").url("https://pokeapi.co/api/v2/move/1/").build()))
+            .build();
    }
 
 }

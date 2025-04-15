@@ -26,6 +26,6 @@ public class ErrorResponseDto implements Serializable {
    private String description;
 
    @Schema(description = "data generic")
-   private Object data;
+   private transient Object data;
 
 }

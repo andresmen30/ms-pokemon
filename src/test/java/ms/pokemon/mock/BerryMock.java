@@ -57,7 +57,6 @@ public class BerryMock {
             .build();
    }
 
-
    private static NameDto getNameDto() {
       return NameDto.builder().name("localized-name").language(NamedAPIResourceMock.getNamedAPIResource()).build();
    }

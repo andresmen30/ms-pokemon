@@ -10,7 +10,6 @@ public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundExceptio
 
    @Override
    public Response toResponse(NotFoundException ex) {
-      return ResponseUtil.createErrorResponse(Response.Status.NOT_FOUND,
-            ex.getMessage(), ex.getResponse());
+      return ResponseUtil.createErrorResponse(Response.Status.NOT_FOUND, ex.getMessage(), ex.getResponse());
    }
 }
